@@ -1,0 +1,9 @@
+mutation update {
+  loginUser(email: "hemin@gmail.com", password: "heminwang") {
+    expiresIn
+    accessToken
+    profile {
+      id
+    }
+  }
+}

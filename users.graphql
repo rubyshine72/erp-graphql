@@ -1,0 +1,12 @@
+query get {
+  findUser(id: "e85d4219-de1c-4665-b8f4-610ef4e1ed20") {
+    id
+    firstName
+    lastName
+    email
+    accessRoles {
+      id
+    }
+    tenantId
+  }
+}

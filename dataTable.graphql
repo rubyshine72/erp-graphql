@@ -1,0 +1,63 @@
+query get {
+  findAllDataTable(
+    where: { applicationId: "e599706d-f165-4f71-9683-d1ccc7cf8e5a" }
+    offset: 0
+    limit: 30
+  ) {
+    nodes {
+      id
+      base_id
+      title
+    }
+    totalCount
+  }
+}
+
+mutation update {
+  createDataTable(
+    applicationId: "e599706d-f165-4f71-9683-d1ccc7cf8e5a"
+    title: "New data table 22"
+    shouldCreateDefaultColumn: true
+  ) {
+    id
+  }
+}
+
+mutation update {
+  createDataRow(tableId: "md_zo4mbsm3xuskn3", data: { Title: "test" }) {
+    id
+  }
+}
+
+query get {
+  findAllDataRow(
+    tableId: "md_zo4mbsm3xuskn3"
+    where: {}
+    offset: 0
+    limit: 20
+  ) {
+    nodes
+    totalCount
+  }
+}
+
+mutation update {
+  createDataColumn(
+    tableId: "md_zo4mbsm3xuskn3"
+    column_name: "sdfasdf"
+    title: "sdfasdf"
+    uidt: Attachment
+  ) {
+    affected
+  }
+}
+
+mutation update {
+  updateDataRow(
+    id: "1"
+    tableId: "md_zo4mbsm3xuskn3"
+    data: {
+      Attachment: "[\n    {\n        \"url\": \"http://storage-api.erp-staging.tinkerve.com:80/nocodb/nc/uploads/noco/tinkerve staging/Departments/Attachment/A-svYcvqfPx8ZcoGGA.avif\",\n        \"title\": \"photo-1600716051809-e997e11a5d52.avif\",\n        \"mimetype\": \"image/avif\",\n        \"size\": 619885\n    }]"
+    }
+  )
+}
