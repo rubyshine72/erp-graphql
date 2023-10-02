@@ -1,5 +1,9 @@
 mutation update {
-  createCollection(name: "test collection", order: 1) {
+  createCollection(
+    name: "test collection",
+    order: 1,
+    applicationId: "e599706d-f165-4f71-9683-d1ccc7cf8e5a"
+  ) {
     id
   }
 }
@@ -10,10 +14,16 @@ query get {
       id
       name
       order
-      collectionData {
-        order
-        dataId
-        data
+      application {
+        id
+        name
+      }
+      collectionData(offset: 0, limit: 100) {
+        nodes {
+          id
+          data
+        }
+        totalCount
       }
     }
     totalCount
@@ -34,7 +44,7 @@ mutation update {
   linkCollectionData(
     id: "43006e15-8959-401f-abb4-35d3f896df12"
     data: [
-      { id: "vw_braa2hgr6uj57h" }
+      { type: VIEW, id: "vw_braa2hgr6uj57h" }
       { type: TABLE, id: "md_x3dww8ter58v31" }
     ]
     isAdd: true
@@ -53,3 +63,52 @@ mutation update {
     affected
   }
 }
+
+
+
+# Find collections on application query
+
+query get {
+  findAllApplication(offset: 0, limit: 20) {
+    nodes {
+      id
+      collections {
+        id
+        name
+        collectionData(offset: 0, limit: 100) {
+          nodes {
+            id
+            type
+            dataId
+            data
+          }
+          totalCount
+        }
+      }
+    }
+    totalCount
+  }
+}
+
+
+
+query get {
+  findApplication(id: "e599706d-f165-4f71-9683-d1ccc7cf8e5a") {
+    id
+    collections {
+      id
+      name
+      collectionData(offset: 0, limit: 100) {
+        nodes {
+          id
+          type
+          dataId
+          data
+        }
+        totalCount
+      }
+    }
+  }
+}
+
+
